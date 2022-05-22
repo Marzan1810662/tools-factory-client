@@ -1,8 +1,16 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import logo from '../../images/logo.png';
 
 const Navbar = () => {
+    const [user, loading, error] = useAuthState(auth);
+
+    const handleLogout = () => {
+        signOut(auth);
+    }
     return (
         <div>
             <div className="navbar bg-base-100 w-full lg:w-3/4 lg:mx-auto ">
@@ -32,7 +40,7 @@ const Navbar = () => {
                     </a>
                 </div>
                 <div className="navbar-center lg:flex">
-                <a className="flex items-center justify-center lg:hidden">
+                    <a className="flex items-center justify-center lg:hidden">
                         <img className='w-14 md:w-2/12 mr-2 rounded-full' src={logo} alt="Logo" />
                         <h1 className='text-xl md:text-4xl font-bold'>Tools Factory</h1>
                     </a>
@@ -43,14 +51,15 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login' className="hidden lg:btn">Log In</Link>
-{/*                     <div className="dropdown dropdown-hover hidden lg:block">
-                        <label tabIndex="0" className="btn m-1">Profile Profile Profile</label>
-                        <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
-                        </ul>
-                    </div> */}
+                    {!user ?
+                        <Link to='/login' className="hidden lg:btn">Log In</Link>
+                        :
+                        <div className="dropdown dropdown-hover hidden lg:block">
+                            <label tabIndex="0" className="btn m-1">{user?.displayName}</label>
+                            <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><button onClick={handleLogout} className='btn btn-outline btn-primary'>Logout</button></li>
+                            </ul>
+                        </div>}
                 </div>
             </div>
         </div>

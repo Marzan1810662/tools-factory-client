@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../Shared/LoadingSpinner';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import SocialLogin from './SocialLogin';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ const Login = () => {
     const { register, handleSubmit, getValues, resetField, watch, formState: { errors } } = useForm();
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending, resertPasswordError] = useSendPasswordResetEmail(auth);
+    const [disableField,setDisableFeild] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -41,11 +42,10 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password);
     };
 
-    let resetEmailError;
     const handleResetPassword = async () => {
-        console.log(getValues('email'));
-        if (!getValues('email')) {
-            resetEmailError = <p className='text-red-500'><small>Email fghfghgis required</small></p>
+        setDisableFeild(true);
+        const emailPattern=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!getValues('email')|| !emailPattern.test(getValues('email'))) {
             return;
         }
         await sendPasswordResetEmail(getValues('email'));
@@ -74,7 +74,7 @@ const Login = () => {
                                         message: 'Email is required'
                                     },
                                     pattern: {
-                                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         message: 'Provide a valid email'
                                     }
                                 }
@@ -86,7 +86,6 @@ const Login = () => {
                             <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                {resetEmailError}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
@@ -104,13 +103,14 @@ const Login = () => {
                                         message: 'Password must be 6 characters or longer'
                                     }
                                 }
-                            )}
+                            )} 
+                                disabled={disableField}
                                 type="password"
                                 placeholder="Type here"
                                 className="input input-bordered w-full max-w-xs"
                             />
                             <label className="label">
-                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
+                                {errors.password?.type === 'required' && <span className={`label-text-alt text-red-500 ${disableField? 'hidden' : 'inline'}`}>{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                             </label>
                         </div>

@@ -58,7 +58,7 @@ const Login = () => {
 
     return (
         <div className='flex justify-center items-center my-12'>
-            <div className="card w-11/12 lg:w-96 bg-base-100 drop-shadow-lg border-2">
+            <div className="card w-11/12 md:w-96 bg-base-100 drop-shadow-lg border-2">
                 <div className="card-body">
                     <h2 className="text-primary text-center text-2xl font-bold">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>

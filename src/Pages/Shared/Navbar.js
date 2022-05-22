@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 
 const Navbar = () => {
@@ -42,7 +43,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="hidden lg:btn">Log In</a>
+                    <Link to='/login' className="hidden lg:btn">Log In</Link>
 {/*                     <div className="dropdown dropdown-hover hidden lg:block">
                         <label tabIndex="0" className="btn m-1">Profile Profile Profile</label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">

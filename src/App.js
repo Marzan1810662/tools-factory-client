@@ -5,8 +5,11 @@ import Login from './Pages/Login/Login';
 import Register from './Pages/Login/Register';
 import Footer from './Pages/Shared/Footer';
 import Navbar from './Pages/Shared/Navbar';
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 function App() {
+  AOS.init();
   return (
     <div className="App">
       <Navbar/>

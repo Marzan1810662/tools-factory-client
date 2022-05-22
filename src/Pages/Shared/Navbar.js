@@ -34,16 +34,16 @@ const Navbar = () => {
                             </li>
                         </ul>
                     </div>
-                    <a className="hidden lg:flex items-center">
+                    <Link className="hidden lg:flex items-center" to='/'>
                         <img className='md:w-2/12 mr-2 rounded-full' src={logo} alt="Logo" />
                         <h1 className=' lg:text-4xl font-bold'>Tools Factory</h1>
-                    </a>
+                    </Link>
                 </div>
                 <div className="navbar-center lg:flex">
-                    <a className="flex items-center justify-center lg:hidden">
+                    <Link className="flex items-center justify-center lg:hidden" to='/'>
                         <img className='w-14 md:w-2/12 mr-2 rounded-full' src={logo} alt="Logo" />
                         <h1 className='text-xl md:text-4xl font-bold'>Tools Factory</h1>
-                    </a>
+                    </Link>
                     <ul className="hidden lg:menu lg:menu-horizontal p-0 font-bold">
                         <li><a>Blogs</a></li>
                         <li><a>My Portfolio</a></li>

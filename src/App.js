@@ -11,27 +11,29 @@ import NotFound from './Pages/NotFound';
 import MyPortfolio from './Pages/MyPortfolio';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyProfile from './Pages/Dashboard/MyProfile';
+import RequireAuth from './Pages/Login/RequireAuth';
 
 function App() {
   AOS.init();
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}>
-          <Route index element={<MyProfile/>}></Route>
-
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/home' element={<Home />}></Route>
+        <Route path='/dashboard' element={<RequireAuth>
+          <Dashboard />
+        </RequireAuth>}>
+          <Route index element={<MyProfile />}></Route>
 
         </Route>
 
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/register' element={<Register/>}></Route>
-        <Route path='/portfolio' element={<MyPortfolio/>}></Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+        <Route path='/portfolio' element={<MyPortfolio />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -10,7 +10,7 @@ const Navbar = () => {
     const navbarItems = <>
         <li><a>Blogs</a></li>
         <li><NavLink to='/portfolio'>My Portfolio</NavLink></li>
-       { user && <li><NavLink to='/dashboard'>Dashnboard</NavLink></li>}
+       { user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
     </>
 
     const handleLogout = () => {

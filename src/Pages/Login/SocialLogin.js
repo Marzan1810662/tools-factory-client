@@ -16,13 +16,12 @@ const SocialLogin = () => {
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        if ( gUser) {
-            console.log( gUser);
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [ gUser, from, navigate]);
+    }, [token,from,navigate]);
 
-    if ( gLoading) {
+    if (gLoading) {
         return <LoadingSpinner />
     }
 

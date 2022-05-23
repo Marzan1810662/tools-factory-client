@@ -23,11 +23,10 @@ const Register = () => {
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        if (user) {
-            console.log(user);
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token,from,navigate])
 
     let signInError;
 

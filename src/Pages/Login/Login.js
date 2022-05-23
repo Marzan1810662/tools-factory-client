@@ -20,11 +20,11 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        if (user) {
-            console.log(user);
+        if (token) {
+            console.log(token);
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token,from,navigate])
 
 
     let signInError;

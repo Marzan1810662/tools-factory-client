@@ -39,7 +39,7 @@ const MyPortfolio = () => {
                         <li>
                             <a target='_blank' rel="noreferrer"  href="https://the-gourmet-kitchen.web.app/">The Gourmet Kitchen</a></li>
                         <li>
-                            <a target='_blank' rel="noreferrer"  href="https://sky-castle-convention-center-marzan.netlify.app/">Sky Castle convention center</a></li>
+                            <a target='_blank' rel="noreferrer"  href="https://rate-and-review.netlify.app/about">Rate and Review</a></li>
                     </ul>
                 </div>
             </div>

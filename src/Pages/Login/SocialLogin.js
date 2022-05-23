@@ -5,9 +5,11 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import auth from '../../firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../Shared/LoadingSpinner';
+import useToken from '../../hooks/useToken';
 
 const SocialLogin = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [token] = useToken(gUser);
     const location = useLocation();
     const navigate = useNavigate();
 

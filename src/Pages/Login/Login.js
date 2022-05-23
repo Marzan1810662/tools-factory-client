@@ -6,11 +6,13 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword} from 'react-f
 import auth from '../../firebase.init';
 import SocialLogin from './SocialLogin';
 import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { register, handleSubmit, getValues, resetField, watch, formState: { errors } } = useForm();
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending, resertPasswordError] = useSendPasswordResetEmail(auth);
+    const [token] = useToken(user);
     const [disableField,setDisableFeild] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import auth from '../../firebase.init';
 import logo from '../../images/logo.png';
 
@@ -9,7 +9,7 @@ const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
     const navbarItems = <>
         <li><a>Blogs</a></li>
-        <li><a>My Portfolio</a></li>
+        <li><NavLink to='/portfolio'>My Portfolio</NavLink></li>
        { user && <li><a>Dashnboard</a></li>}
     </>
 
@@ -28,7 +28,7 @@ const Navbar = () => {
                             {navbarItems}
                             <li tabIndex="0">
                                 {!user ?
-                                    <Link to='/login' className="btn-sm btn-primary text-white">Login</Link>
+                                    <Link to='/login' className="btn-sm btn-secondary text-white">Login</Link>
                                     :
                                     <>
                                         <p className="justify-between">
@@ -61,7 +61,7 @@ const Navbar = () => {
                         <Link to='/login' className="hidden lg:btn">Login</Link>
                         :
                         <div className="dropdown dropdown-hover hidden lg:block">
-                            <label tabIndex="0" className="btn m-1">{user? user?.displayName : 'Profile'}</label>
+                            <label tabIndex="0" className="btn m-1">{user.displayName? user?.displayName : 'Profile'}</label>
                             <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><button onClick={handleLogout} className='btn btn-outline btn-primary'>Logout</button></li>
                             </ul>

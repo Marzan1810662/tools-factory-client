@@ -8,6 +8,7 @@ import Navbar from './Pages/Shared/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css'
 import NotFound from './Pages/NotFound';
+import MyPortfolio from './Pages/MyPortfolio';
 
 function App() {
   AOS.init();
@@ -19,6 +20,7 @@ function App() {
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
+        <Route path='/portfolio' element={<MyPortfolio/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
       </Routes>
       <Footer/>

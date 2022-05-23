@@ -9,6 +9,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'
 import NotFound from './Pages/NotFound';
 import MyPortfolio from './Pages/MyPortfolio';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import MyProfile from './Pages/Dashboard/MyProfile';
 
 function App() {
   AOS.init();
@@ -18,6 +20,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}>
+          <Route index element={<MyProfile/>}></Route>
+
+
+        </Route>
+
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/portfolio' element={<MyPortfolio/>}></Route>

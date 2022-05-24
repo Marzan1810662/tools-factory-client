@@ -11,8 +11,10 @@ import NotFound from './Pages/NotFound';
 import MyPortfolio from './Pages/MyPortfolio';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyProfile from './Pages/Dashboard/MyProfile';
+import AddProduct from './Pages/Dashboard/AddProduct';
 import RequireAuth from './Pages/Login/RequireAuth';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
+import RequireAdmin from './Pages/Dashboard/RequireAdmin';
 
 function App() {
   AOS.init();
@@ -26,7 +28,11 @@ function App() {
           <Dashboard />
         </RequireAuth>}>
           <Route index element={<MyProfile />}></Route>
-          <Route path='makeAdmin' element={<MakeAdmin />}></Route>
+          <Route path='addProduct' element={<AddProduct />}></Route>
+          <Route path='makeAdmin' element={
+            <RequireAdmin>
+              <MakeAdmin />
+            </RequireAdmin>}></Route>
 
         </Route>
 

@@ -9,7 +9,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 const MakeAdmin = () => {
     const navigate = useNavigate();
     const { data: users, isLoading, refetch } = useQuery('users',
-        () => fetch('http://localhost:5000/user', {
+        () => fetch('https://tools-factory.herokuapp.com/user', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -30,7 +30,7 @@ const MakeAdmin = () => {
     }
 
     const makeAdmin = (email) => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://tools-factory.herokuapp.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -85,7 +85,7 @@ const MakeAdmin = () => {
                                             <p className='text-success font-bold'>Admin</p>
                                             :
                                             <button
-                                                onClick={() => makeAdmin(user.email)} className='btn btn-sm btn-secondary btn-outline' >Make Admin</button>
+                                                onClick={() => makeAdmin(user?.email)} className='btn btn-sm btn-secondary btn-outline' >Make Admin</button>
                                     }
                                 </td>
                             </tr>)

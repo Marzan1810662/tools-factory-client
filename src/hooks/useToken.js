@@ -10,7 +10,7 @@ const useToken = user => {
                 email: email
             };
             //`https://tools-factory.herokuapp.com/user/${email}`
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://tools-factory.herokuapp.com/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -19,7 +19,7 @@ const useToken = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     localStorage.setItem('accessToken', data.token);
                     setToken(data.token);
                 })

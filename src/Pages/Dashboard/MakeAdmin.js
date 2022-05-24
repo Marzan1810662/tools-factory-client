@@ -38,7 +38,7 @@ const MakeAdmin = () => {
             }
         })
             .then(res => {
-                if(res.status === 403){
+                if (res.status === 403) {
                     Swal.fire({
                         icon: 'success',
                         text: `Forbidden Access! Not Admin.`
@@ -46,7 +46,8 @@ const MakeAdmin = () => {
                     signOut(auth);
                     localStorage.removeItem('accessToken');
                 }
-                return res.json()})
+                return res.json()
+            })
             .then(data => {
                 console.log(data);
                 if (data.modifiedCount === 1) {
@@ -79,8 +80,12 @@ const MakeAdmin = () => {
                                 <td>{user?.email}</td>
                                 <td>
                                     {
-                                        user?.role === 'admin' ? <p>Admin</p> : <button
-                                            onClick={() => makeAdmin(user.email)} className='btn btn-sm btn-secondary btn-outline' >Make Admin</button>
+                                        user?.role === 'admin'
+                                            ?
+                                            <p className='text-success font-bold'>Admin</p>
+                                            :
+                                            <button
+                                                onClick={() => makeAdmin(user.email)} className='btn btn-sm btn-secondary btn-outline' >Make Admin</button>
                                     }
                                 </td>
                             </tr>)

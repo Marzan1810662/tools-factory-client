@@ -37,7 +37,16 @@ const MakeAdmin = () => {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if(res.status === 403){
+                    Swal.fire({
+                        icon: 'success',
+                        text: `Forbidden Access! Not Admin.`
+                    })
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                }
+                return res.json()})
             .then(data => {
                 console.log(data);
                 if (data.modifiedCount === 1) {

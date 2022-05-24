@@ -1,9 +1,14 @@
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
+import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 
 const Dashboard = () => {
+    const [user, loading, error] = useAuthState(auth);
+    const [admin] = useAdmin(user);
     return (
         <div className="drawer drawer-mobile lg:w-3/4 lg:mx-auto">
             <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
@@ -20,8 +25,12 @@ const Dashboard = () => {
                 <ul className="menu p-2 overflow-y-auto w-44 md:w-48 bg-[#f4c1a6] font-bold">
                     {/* Sidebar content here  */}
                     <li className='border border-primary rounded'><Link to='/dashboard'>My Profile</Link></li>
-                    <li className='border border-primary rounded'><Link to='/dashboard/addProduct'>Add product</Link></li>
-                    <li className='border border-primary rounded'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                    {
+                        admin && <>
+                            <li className='border border-primary rounded'><Link to='/dashboard/addProduct'>Add product</Link></li>
+                            <li className='border border-primary rounded'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
+                        </>
+                    }
                 </ul>
 
             </div>

@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -7,10 +7,16 @@ import auth from '../../firebase.init';
 
 const AddProduct = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors },getValues } = useForm();
+    const [qtyError, setQtyError] = useState('');
+
 
     const onSubmit = async data => {
-        console.log(data);
+        if( parseInt(data.minOrderQty) > parseInt(data.stockQty) ){
+            setQtyError('Minimum order quantity can not be greater then in stock quantity')
+            return;
+        }
+        setQtyError('')
         fetch('https://tools-factory.herokuapp.com/tool', {
             method: 'POST',
             headers: {
@@ -34,7 +40,6 @@ const AddProduct = () => {
                         text: `Product added Successfully`
                     })
                 }
-                console.log(data);
             })
     };
 
@@ -140,6 +145,7 @@ const AddProduct = () => {
                         />
                         <label className="label">
                             {errors.minOrderQty?.type === 'required' && <span className="label-text-alt text-red-500">{errors.minOrderQty.message}</span>}
+                            <span className={`label-text-alt text-red-500 ${qtyError} ? 'inline' : 'hidden'` }>{qtyError}</span>
                         </label>
                     </div>
                     <div className="form-control w-full">

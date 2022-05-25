@@ -25,6 +25,9 @@ const Dashboard = () => {
                 <ul className="menu p-2 overflow-y-auto w-44 md:w-48 bg-[#f4c1a6] font-bold">
                     {/* Sidebar content here  */}
                     <li className='border border-primary rounded'><Link to='/dashboard'>My Profile</Link></li>
+                    {!admin && <>
+                        <li className='border border-primary rounded'><Link to='/dashboard/addReview'>Add Review</Link></li>
+                    </>}
                     {
                         admin && <>
                             <li className='border border-primary rounded'><Link to='/dashboard/addProduct'>Add product</Link></li>

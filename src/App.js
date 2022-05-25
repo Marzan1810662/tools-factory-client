@@ -16,6 +16,7 @@ import RequireAuth from './Pages/Login/RequireAuth';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 import RequireAdmin from './Pages/Dashboard/RequireAdmin';
 import AddReview from './Pages/Dashboard/AddReview';
+import AllTools from './Pages/AllTools';
 
 function App() {
   AOS.init();
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
+        <Route path='/allTools' element={<AllTools />}></Route>
         <Route path='/dashboard' element={<RequireAuth>
           <Dashboard />
         </RequireAuth>}>

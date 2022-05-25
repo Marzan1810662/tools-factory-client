@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
 import auth from '../../firebase.init';
 import logo from '../../images/logo.png';
+import LoadingSpinner from './LoadingSpinner';
 
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -12,6 +13,10 @@ const Navbar = () => {
         <li><NavLink to='/portfolio'>My Portfolio</NavLink></li>
        { user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
     </>
+    
+    if(loading){
+        return <LoadingSpinner/>
+    }
 
     const handleLogout = () => {
         signOut(auth);

@@ -7,7 +7,7 @@ const Tool = ({ tool }) => {
             <figure><img src={productImage} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{productName}</h2>
-                <p className='text-left'>{productDescription}</p>
+                <p className='text-left break-words'>{productDescription}</p>
                 <p className='text-left'><strong>In Stock:</strong> {stockQty}</p>
                 <p className='text-left'><strong>Minimum Order Quantity:</strong> {minOrderQty}</p>
                 <p className='text-left'><strong>Price per Unit:</strong> {price} </p>

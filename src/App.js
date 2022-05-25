@@ -17,6 +17,7 @@ import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 import RequireAdmin from './Pages/Dashboard/RequireAdmin';
 import AddReview from './Pages/Dashboard/AddReview';
 import AllTools from './Pages/AllTools';
+import ManageProducts from './Pages/Dashboard/ManageProducts';
 
 function App() {
   AOS.init();
@@ -31,13 +32,19 @@ function App() {
           <Dashboard />
         </RequireAuth>}>
           <Route index element={<MyProfile />}></Route>
-          <Route path='addProduct' element={<AddProduct />}></Route>
           <Route path='addReview' element={<AddReview />}></Route>
           <Route path='makeAdmin' element={
             <RequireAdmin>
               <MakeAdmin />
             </RequireAdmin>}></Route>
-
+          <Route path='addProduct' element={
+            <RequireAdmin>
+              <AddProduct />
+            </RequireAdmin>}></Route>
+          <Route path='ManageProducts' element={
+            <RequireAdmin>
+              <ManageProducts />
+            </RequireAdmin>}></Route>
         </Route>
 
         <Route path='/login' element={<Login />}></Route>

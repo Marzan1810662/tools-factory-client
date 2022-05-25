@@ -1,27 +1,36 @@
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { signOut } from 'firebase/auth';
+import { signOut, updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const MyProfile = () => {
     const [disable, setDisable] = useState(true);
+    const navigate = useNavigate();
     const [user, loading, error] = useAuthState(auth);
-    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
-    const { data: userProfile, isLoading, refetch } = useQuery(['user',user.email],
-        () => fetch(`https://tools-factory.herokuapp.com/user/${user?.email}`, {
+    const { register, handleSubmit, formState: { errors }, getFieldState } = useForm();
+
+    const { data: userProfile, isLoading, refetch } = useQuery(['user', user.email],
+        () => fetch(`https://tools-factory.herokuapp.com/user/${user.email}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
-        }).then(res => res.json()));
-    console.log(user);
+        }).then(res => {
+            if (res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                navigate('/login');
+            }
+            return res.json();
+        }));
 
     if (loading || isLoading) {
         return <LoadingSpinner />
@@ -30,9 +39,20 @@ const MyProfile = () => {
     const handleEdit = () => {
         setDisable(false)
     }
+    // console.log(userProfile);
 
     const onSubmit = async data => {
         console.log(data);
+        !getFieldState('education').isTouched && (data.education = userProfile.education ? userProfile.education : '')
+        !getFieldState('location').isTouched && (data.location = userProfile.location ? userProfile.location : '')
+        !getFieldState('phone').isTouched && (data.phone = userProfile.phone ? userProfile.phone : '')
+        !getFieldState('linkedIn').isTouched && (data.linkedIn = userProfile.linkedIn ? userProfile.linkedIn : '')
+        console.log(getFieldState('education').isTouched)
+        console.log(getFieldState('location').isTouched)
+        console.log(getFieldState('phone').isTouched)
+        console.log(getFieldState('linkedIn').isTouched)
+        setDisable(true)
+        // https://tools-factory.herokuapp.com/user/updateProfile/${user?.email}`
         fetch(`https://tools-factory.herokuapp.com/user/updateProfile/${user?.email}`, {
             method: 'PUT',
             headers: {
@@ -53,18 +73,16 @@ const MyProfile = () => {
                 return res.json()
             })
             .then(data => {
-                console.log(data);
                 if (data.modifiedCount === 1) {
                     Swal.fire({
                         icon: 'success',
                         text: `${user.email} profile updated`
                     })
-                    setDisable(true)
+
                 }
                 refetch();
             })
     };
-    console.log(userProfile);
 
     return (
         <div className='w-11/12 md:w-2/4 bg-base-100 drop-shadow-lg border-2 my-5 mx-auto md:p-4'>

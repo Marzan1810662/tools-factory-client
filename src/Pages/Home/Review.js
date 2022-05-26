@@ -15,7 +15,7 @@ const Review = ({ review }) => {
                         readonly
                     ></Rating>
                 </h2>
-                <p className='text-left'>{review.review}</p>
+                <p className='text-left break-words'>{review.review}</p>
                 <div className="card-actions justify-end">
                     <div className="badge">-{review.name}</div>
                 </div>

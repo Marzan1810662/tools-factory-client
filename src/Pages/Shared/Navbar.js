@@ -9,7 +9,7 @@ import LoadingSpinner from './LoadingSpinner';
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
     const navbarItems = <>
-        <li><a>Blogs</a></li>
+        <li><NavLink to='/blogs'>Blogs</NavLink></li>
         <li><NavLink to='/portfolio'>My Portfolio</NavLink></li>
        { user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
     </>

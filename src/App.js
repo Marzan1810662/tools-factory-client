@@ -21,6 +21,7 @@ import ManageProducts from './Pages/Dashboard/ManageProducts';
 import Purchase from './Pages/Dashboard/Purchase';
 import ManageAllOrders from './Pages/Dashboard/ManageAllOrders';
 import MyOrders from './Pages/Dashboard/MyOrders';
+import Payment from './Pages/Dashboard/Payment';
 
 function App() {
   AOS.init();
@@ -44,6 +45,7 @@ function App() {
           <Route path='myOrders' element={<RequireAuth>
             <MyOrders />
           </RequireAuth>}></Route>
+        <Route path='payment/:id' element={<Payment />}></Route>
           <Route path='makeAdmin' element={
             <RequireAdmin>
               <MakeAdmin />

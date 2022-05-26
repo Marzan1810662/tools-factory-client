@@ -30,8 +30,9 @@ const Dashboard = () => {
                     </>}
                     {
                         admin && <>
-                            <li className='border border-primary rounded'><Link to='/dashboard/addProduct'>Add product</Link></li>
+                            <li className='border border-primary rounded'><Link to='/dashboard/addProduct'>Add Product</Link></li>
                             <li className='border border-primary rounded'><Link to='/dashboard/manageProducts'>Manage products</Link></li>
+                            <li className='border border-primary rounded'><Link to='/dashboard/ManageAllOrders'>Manage All Orders</Link></li>
                             <li className='border border-primary rounded'><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
                         </>
                     }

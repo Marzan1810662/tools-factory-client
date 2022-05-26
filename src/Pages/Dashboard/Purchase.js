@@ -53,9 +53,10 @@ const Purchase = () => {
             userPhone: data.phone,
             shippingAddress: data.address,
             productName: tool.productName,
-            minOrderQty: tool.minOrderQty,
+            productImage:tool.productImage,
             orderedQty: data.qty,
-            priceAmount: amount
+            priceAmount: amount,
+            status:'Unpaid'
         }
         console.log(OrderdInformation);
         fetch('https://tools-factory.herokuapp.com/order', {

@@ -19,6 +19,7 @@ import AddReview from './Pages/Dashboard/AddReview';
 import AllTools from './Pages/AllTools';
 import ManageProducts from './Pages/Dashboard/ManageProducts';
 import Purchase from './Pages/Dashboard/Purchase';
+import ManageAllOrders from './Pages/Dashboard/ManageAllOrders';
 
 function App() {
   AOS.init();
@@ -50,6 +51,10 @@ function App() {
           <Route path='ManageProducts' element={
             <RequireAdmin>
               <ManageProducts />
+            </RequireAdmin>}></Route>
+          <Route path='ManageAllOrders' element={
+            <RequireAdmin>
+              <ManageAllOrders />
             </RequireAdmin>}></Route>
         </Route>
 

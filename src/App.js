@@ -22,6 +22,7 @@ import Purchase from './Pages/Dashboard/Purchase';
 import ManageAllOrders from './Pages/Dashboard/ManageAllOrders';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import Payment from './Pages/Dashboard/Payment';
+import Blogs from './Pages/Blogs';
 
 function App() {
   AOS.init();
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/home' element={<Home />}></Route>
+        <Route path='/blogs' element={<Blogs />}></Route>
         <Route path='/allTools' element={<AllTools />}></Route>
         <Route path='purchase/:id' element={<RequireAuth>
           <Purchase />

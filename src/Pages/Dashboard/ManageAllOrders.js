@@ -9,7 +9,13 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 const ManageAllOrders = () => {
     const navigate = useNavigate();
     const { data: orders, isLoading, refetch } = useQuery('orders', () =>
-        fetch(`https://tools-factory.herokuapp.com/order`)
+        fetch(`https://tools-factory.herokuapp.com/order`,{
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json()));
 
     if (isLoading) {

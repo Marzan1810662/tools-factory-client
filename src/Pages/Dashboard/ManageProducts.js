@@ -18,7 +18,7 @@ const ManageProducts = () => {
     if (isLoading) {
         return <LoadingSpinner />
     }
-    const HandleDelete = (id) => {
+    const handleDelete = (id) => {
         console.log(id);
         Swal.fire({
             title: 'Are you sure?',
@@ -94,7 +94,7 @@ const ManageProducts = () => {
                                 <td>{tool?.minOrderQty}</td>
                                 <td>{tool?.price}</td>
                                 <td><button
-                                    onClick={() => HandleDelete(tool._id)}
+                                    onClick={() => handleDelete(tool._id)}
                                     className='btn btn-outline btn-primary'>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </button></td>

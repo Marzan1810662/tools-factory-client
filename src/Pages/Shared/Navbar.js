@@ -9,13 +9,14 @@ import LoadingSpinner from './LoadingSpinner';
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
     const navbarItems = <>
+        <li><NavLink to='/allTools'>All Products</NavLink></li>
         <li><NavLink to='/blogs'>Blogs</NavLink></li>
         <li><NavLink to='/portfolio'>My Portfolio</NavLink></li>
-       { user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
+        {user && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
     </>
-    
-    if(loading){
-        return <LoadingSpinner/>
+
+    if (loading) {
+        return <LoadingSpinner />
     }
 
     const handleLogout = () => {
@@ -38,7 +39,7 @@ const Navbar = () => {
                                     :
                                     <>
                                         <p className="justify-between">
-                                        {user? user?.displayName : 'Profile'}
+                                            {user ? user?.displayName : 'Profile'}
                                             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
                                         </p>
                                         <ul className="p-2">
@@ -67,7 +68,7 @@ const Navbar = () => {
                         <Link to='/login' className="hidden lg:btn">Login</Link>
                         :
                         <div className="dropdown dropdown-hover hidden lg:block">
-                            <label tabIndex="0" className="btn m-1">{user.displayName? user?.displayName : 'Profile'}</label>
+                            <label tabIndex="0" className="btn m-1">{user.displayName ? user?.displayName : 'Profile'}</label>
                             <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><button onClick={handleLogout} className='btn btn-outline btn-primary'>Logout</button></li>
                             </ul>

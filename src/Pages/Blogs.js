@@ -86,7 +86,7 @@ const Blogs = () => {
                         <p className='text-left break-words'>
                         Individual units or chunks of code are tested in unit testing, which is a type of software testing. Its purpose is to guarantee that each code unit performs as expected. A  method, or an entire class can be  a unit. When we test incredibly small components, our tests can be completed rapidly.
                         </p>
-                        <p>
+                        <p  className='text-left break-words'>
                         Unit tests should be written because they save time, serve as guideline for future developers working on the system, make debugging easier, and allow for code reuse, among other benefits.
                         </p>
                     </div>

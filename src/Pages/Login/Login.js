@@ -17,11 +17,10 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const from = location.state?.from?.pathname || '/';
+    const from = location?.state?.from?.pathname || '/';
 
     useEffect(() => {
         if (token) {
-            // console.log(token);
             navigate(from, { replace: true });
         }
     }, [token,from,navigate])

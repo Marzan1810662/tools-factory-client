@@ -7,7 +7,7 @@ import services from '../../images/service.png'
 
 const Help = () => {
     return (
-        <div>
+        <div className='border-t'>
             <div className='py-2 my-2 '>
                 <h1 className='text-4xl font-bold text-[#421700]'>How Can We Help!</h1>
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 px-4 lg:px-28 my-6'>
@@ -33,7 +33,7 @@ const Help = () => {
                             Service <FontAwesomeIcon className='ml-2 text-sm' icon={faAngleRight} />
                         </button>
                         <p className='text-lg font-bold'>Have a tool that needs to be serviced?
-                            We’ll help you get back to work.</p>
+                            We will help you get back to work.</p>
                     </div>
                 </div>
             </div>

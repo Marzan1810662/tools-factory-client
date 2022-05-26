@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [user, loading, error] = useAuthState(auth);
     const [admin] = useAdmin(user);
     return (
-        <div className="drawer drawer-mobile lg:w-3/4 lg:mx-auto">
+        <div className="drawer drawer-mobile lg:w-full lg:mx-auto">
             <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col lg:border">
                 <label htmlFor="dashboard-sidebar" className="lg:hidden text-right mr-5 text-2xl text-primary">
@@ -27,6 +27,7 @@ const Dashboard = () => {
                     <li className='border border-primary rounded'><Link to='/dashboard'>My Profile</Link></li>
                     {!admin && <>
                         <li className='border border-primary rounded'><Link to='/dashboard/addReview'>Add Review</Link></li>
+                        <li className='border border-primary rounded'><Link to='/dashboard/myOrders'>My Orders</Link></li>
                     </>}
                     {
                         admin && <>

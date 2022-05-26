@@ -20,6 +20,7 @@ import AllTools from './Pages/AllTools';
 import ManageProducts from './Pages/Dashboard/ManageProducts';
 import Purchase from './Pages/Dashboard/Purchase';
 import ManageAllOrders from './Pages/Dashboard/ManageAllOrders';
+import MyOrders from './Pages/Dashboard/MyOrders';
 
 function App() {
   AOS.init();
@@ -39,6 +40,9 @@ function App() {
           <Route index element={<MyProfile />}></Route>
           <Route path='addReview' element={<RequireAuth>
             <AddReview />
+          </RequireAuth>}></Route>
+          <Route path='myOrders' element={<RequireAuth>
+            <MyOrders />
           </RequireAuth>}></Route>
           <Route path='makeAdmin' element={
             <RequireAdmin>

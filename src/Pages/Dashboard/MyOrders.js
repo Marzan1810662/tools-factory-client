@@ -13,7 +13,7 @@ const MyOrders = () => {
     const navigate = useNavigate();
 
     const { data: orders, isLoading, refetch } = useQuery('order', () =>
-        fetch(`https://tools-factory.herokuapp.com/order/${user.email}`, {
+        fetch(`https://tools-factory.herokuapp.com/orders/${user.email}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -81,6 +81,7 @@ const MyOrders = () => {
                     <thead>
                         <tr className='text-xl text-center'>
                             <th>No.</th>
+                            <th>Order Id</th>
                             <th>Product Name</th>
                             <th>Product Image</th>
                             {/* <th>User Name</th>
@@ -96,6 +97,7 @@ const MyOrders = () => {
                         {
                             orders?.map((order, index) => <tr key={order._id} className='hover text-center'>
                                 <th>{++index}</th>
+                                <th>{order._id}</th>
                                 <td>{order?.productName}</td>
                                 <td>
                                     <div className="avatar">
@@ -109,10 +111,14 @@ const MyOrders = () => {
                                 <td><span>{order?.shippingAddress}</span></td>
                                 <td>{order?.orderedQty}</td>
                                 <td>{order?.priceAmount}</td>
-                                <td className={`${order.status === 'Shipped' ? 'text-success font-bold' : ''}`}>{order?.status}</td>
+                                <td className={`${order.status === 'Shipped' ? 'text-success font-bold' : ''}`}>
+                                    {order?.status}
+                                    <br />
+                                    {order.transactionId ?  `transection Id: ${order.transactionId}` : ''}
+                                </td>
                                 <td>
                                     <button
-                                        // onClick={() => handlePay(order._id)}
+                                        onClick={() => navigate(`/dashboard/payment/${order._id}`)}
                                         className={`btn btn-sm btn-success mb-4 ${order.status === 'Unpaid' ? 'block' : 'hidden'}`}>
                                         Pay <FontAwesomeIcon icon={faCreditCard} />
                                     </button>

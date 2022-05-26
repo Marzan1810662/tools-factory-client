@@ -1,11 +1,14 @@
 
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 
 const Checkout = ({ order }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
@@ -13,7 +16,7 @@ const Checkout = ({ order }) => {
     const [clientSecret, setClientSecret] = useState("");
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://tools-factory.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -82,7 +85,7 @@ const Checkout = ({ order }) => {
                 transactionId: paymentIntent.id
             }
 
-            fetch(`http://localhost:5000/order/${order._id}`, {
+            fetch(`https://tools-factory.herokuapp.com/order/${order._id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
@@ -90,11 +93,17 @@ const Checkout = ({ order }) => {
                 },
                 body: JSON.stringify(paymentInfo)
             })
-                .then(res => res.json()).then(data => {
+                .then(res => res.json())
+                .then(data => {
                     setProcessing(false);
                     console.log(data);
+                    navigate('/dashboard/myOrders');
                 })
         }
+    }
+
+    if(processing){
+        return <LoadingSpinner/>
     }
 
     return (
@@ -116,7 +125,7 @@ const Checkout = ({ order }) => {
                         },
                     }}
                 />
-                <button className='btn btn-success btn-sm mt-4' type="submit"  >
+                <button className='my-4 btn btn-success btn-wide mt-4' type="submit" disabled={!stripe || !clientSecret ||success} >
                     Pay
                 </button>
             </form>

@@ -4,6 +4,7 @@ Live site Link:  [https://tools-factory.web.app/](https://tools-factory.web.app/
 
 ## `Features and Functionalities`
 * User authentication
+* two types of user role i.e Admin and User.
 * user specific dashboard
 * Users can add reviews and view all the reviews on home page
 * User can purchase any tool
@@ -18,10 +19,13 @@ Live site Link:  [https://tools-factory.web.app/](https://tools-factory.web.app/
 
 ## `Technology Used`
 * React js
+* Tailwind Css
+* Daisy UI
 * React Router
 * React Hook Form
 * React Query
 * Firebase
+* Stripe
 * React firebase hooks
 * React fontawesom icon
 * AOS

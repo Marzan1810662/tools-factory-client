@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const Purchase = () => {
     const [user, loading, error] = useAuthState(auth);
-    const { register, handleSubmit, formState: { errors }, getFieldState } = useForm();
+    const { register, handleSubmit, formState: { errors }, getFieldState, setValue } = useForm();
     const { id } = useParams();
     const [disable, setDisable] = useState(false);
+    const navigate = useNavigate();
+
     const { data: tool, isLoading } = useQuery('tool',
         () => fetch(`https://tools-factory.herokuapp.com/tool/${id}`)
             .then(res => res.json())
@@ -20,6 +22,8 @@ const Purchase = () => {
     if (isLoading) {
         return <LoadingSpinner />
     }
+
+    setValue('qty',tool.minOrderQty)
 
     const handleQuantity = (qty) => {
         console.log(typeof qty);
@@ -71,7 +75,7 @@ const Purchase = () => {
                 if (res.status === 403) {
                     signOut(auth);
                     localStorage.removeItem('accessToken');
-                    Navigate('/login');
+                    navigate('/login');
                 }
                 return res.json();
             })
@@ -81,6 +85,7 @@ const Purchase = () => {
                         icon: 'success',
                         text: `Your order is placed.Proceed to payment`
                     })
+                    navigate('/dashboard/myOrders');
                 }
             })
     }

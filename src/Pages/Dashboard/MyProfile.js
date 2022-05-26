@@ -100,7 +100,7 @@ const MyProfile = () => {
                             type="text"
                             placeholder="Type here"
                             className="input input-bordered w-full"
-                            defaultValue={userProfile.name}
+                            defaultValue={user?.displayName}
                             disabled={true}
                         />
                     </div>
